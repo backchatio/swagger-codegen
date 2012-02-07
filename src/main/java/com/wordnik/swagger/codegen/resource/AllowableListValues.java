@@ -16,6 +16,8 @@
 
 package com.wordnik.swagger.codegen.resource;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.List;
 
 /**
@@ -47,13 +49,6 @@ public class AllowableListValues extends AllowableValues {
 
     @Override
     public String toString() {
-        StringBuffer buffer = new StringBuffer();
-        if(this.getValues() != null){
-            for(String value : values ){
-                buffer.append(value);
-                buffer.append(",");
-            }
-        }
-        return buffer.toString().substring(0, buffer.toString().length()-1);
+        return StringUtils.join(getValues(), ",");
     }
 }
