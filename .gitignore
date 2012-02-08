@@ -2,6 +2,7 @@
 out/
 *.ipr
 *.iws
+.idea
 classpath.txt
 version.properties
 .project
