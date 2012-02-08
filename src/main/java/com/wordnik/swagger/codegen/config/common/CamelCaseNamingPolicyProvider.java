@@ -91,7 +91,7 @@ public class CamelCaseNamingPolicyProvider implements NamingPolicyProvider {
                  }
              }
          }
-         return className+ "API";
+         return (className == null ? "Root" : className) + "API";
     }
 
     /**

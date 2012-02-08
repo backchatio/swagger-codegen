@@ -99,7 +99,7 @@ public class UnderscoreNamingPolicyProvider implements NamingPolicyProvider {
                  }
              }
          }
-         return className + "_api";
+        return (className == null ? "root" : className) + "_api";
     }
 
     /**
