@@ -30,6 +30,11 @@ public class CodeGenerationException extends RuntimeException {
         this.message = message;
     }
 
+    public CodeGenerationException(String message, Throwable cause){
+        super(cause);
+        this.message = message;
+    }
+
     public String getMessage() {
         return message;
     }

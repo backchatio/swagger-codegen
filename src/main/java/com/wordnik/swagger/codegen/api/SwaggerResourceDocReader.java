@@ -149,7 +149,7 @@ public class SwaggerResourceDocReader {
             }
         }
         catch (IOException ex) {
-            throw new CodeGenerationException("Error in coverting resource listing json documentation to java object");
+            throw new CodeGenerationException("Error in coverting resource listing json documentation to java object", ex);
 
         }
         return resourceCsv;
