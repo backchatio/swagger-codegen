@@ -82,27 +82,30 @@ public class APIInvoker {
 	 * 						for more details. {@link com.sun.jersey.api.client.filter.LoggingFilter}. Default output is sent to system.out.
 	 * 						Create a logger ({@link java.util.logging.Logger} class and set using setLogger method.
 	 */
-	public static APIInvoker initialize(SecurityHandler securityHandler, String apiServer, boolean enableLogging) {
-        APIInvoker invoker = new APIInvoker();
-		invoker.setSecurityHandler(securityHandler);
-		if(apiServer != null && apiServer.length() > 0) {
-			if(apiServer.substring(apiServer.length()-1).equals("/")){
-				apiServer = apiServer.substring(0, apiServer.length()-1);
-			}
-			invoker.setApiServer(apiServer);
-		}
-		invoker.setLoggingEnable(enableLogging);
+    public static APIInvoker initialize(SecurityHandler securityHandler, String apiServer, boolean enableLogging) {
+        return initialize(new APIInvoker(), securityHandler, apiServer, enableLogging);
+    }
+
+    public static APIInvoker initialize(APIInvoker invoker, SecurityHandler securityHandler, String apiServer, boolean enableLogging) {
+        invoker.setSecurityHandler(securityHandler);
+        if(apiServer != null && apiServer.length() > 0) {
+            if(apiServer.substring(apiServer.length()-1).equals("/")){
+                apiServer = apiServer.substring(0, apiServer.length()-1);
+            }
+            invoker.setApiServer(apiServer);
+        }
+        invoker.setLoggingEnable(enableLogging);
         //initialize the logger if needed
         if(loggingEnabled) {
-        	if(logger == null) {
-        		apiClient.addFilter(new LoggingFilter());
-        	}else{
-        		apiClient.addFilter(new LoggingFilter(logger));
-        	}
+            if(logger == null) {
+                apiClient.addFilter(new LoggingFilter());
+            }else{
+                apiClient.addFilter(new LoggingFilter(logger));
+            }
         }
         apiInvoker = invoker;
         return invoker;
-	}
+    }
 
     /**
      * Returns lst initialized API invoker
@@ -227,7 +230,7 @@ public class APIInvoker {
 	 * @param inputClassName
 	 * @return
 	 */
-	public static Object deserialize(String response, Class inputClassName) throws APIException {
+	public Object deserialize(String response, Class inputClassName) throws APIException {
         try {
             if(inputClassName.isAssignableFrom(String.class)){
                 return response;
