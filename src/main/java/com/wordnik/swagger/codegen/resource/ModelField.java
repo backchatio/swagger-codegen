@@ -226,8 +226,8 @@ public class ModelField {
                     fieldDefinition.getImportDefinitions().addAll(dataTypeMapper.getMapIncludes());
                     String keyClass, entryClass = "";
                     String entryType = type.substring(4, type.length()-1);
-                    keyClass = entryType.substring(0, entryType.indexOf(",") );
-                    entryClass = entryType.substring(entryType.indexOf(",") + 1, entryType.length());
+                    keyClass = entryType.substring(0, entryType.indexOf(",") ).trim();
+                    entryClass = entryType.substring(entryType.indexOf(",") + 1, entryType.length()).trim();
                     fieldDefinition.setHasPrimitiveType(dataTypeMapper.isPrimitiveType(entryClass));
                     fieldDefinition.setHasMapResponse(true);
                     //entryType =  dataTypeMapper.getClassType(entryType, true);
