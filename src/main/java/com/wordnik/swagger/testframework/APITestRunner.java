@@ -474,7 +474,7 @@ public class APITestRunner {
             Object responseObject = mapper.readValue(inputJSON, TypeFactory.type(objectType));
             return responseObject;
         }else{
-            return APIInvoker.deserialize(inputJSON, className);
+            return APIInvoker.getApiInvoker().deserialize(inputJSON, className);
         }
     }
 
