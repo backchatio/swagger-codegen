@@ -20,6 +20,7 @@ import com.wordnik.swagger.codegen.MethodArgument;
 import com.wordnik.swagger.codegen.ResourceMethod;
 import com.wordnik.swagger.codegen.config.DataTypeMappingProvider;
 import com.wordnik.swagger.codegen.config.NamingPolicyProvider;
+import com.wordnik.swagger.codegen.config.DataTypeMappingProvider2;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -329,7 +330,12 @@ public class EndpointOperation {
             if (method.getArguments() != null && method.getArguments().size() > 0) {
                 for(MethodArgument arg: method.getArguments()) {
                     if(!arg.getName().equalsIgnoreCase(FORMAT_PARAM_NAME)){
-                        argumentDefinitions.add( dataTypeMapper.getArgumentDefinition(arg.getDataType(), arg.getName()) );
+                        String ad = null;
+                        if (dataTypeMapper instanceof DataTypeMappingProvider2)
+                            ad = ((DataTypeMappingProvider2) dataTypeMapper).getArgumentDefinition(arg);
+                        else
+                            ad = dataTypeMapper.getArgumentDefinition(arg.getDataType(), arg.getName());
+                        argumentDefinitions.add( ad );
                         argumentNames.add(arg.getName());
                     }
                 }
