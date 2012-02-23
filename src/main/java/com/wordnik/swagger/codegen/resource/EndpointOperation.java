@@ -309,6 +309,7 @@ public class EndpointOperation {
                         aModelField.setDescription(argument.getDescription());
                         aModelField.setName(argument.getName());
                         aModelField.setParamType(argument.getDataType());
+                        aModelField.setRequired(argument.isRequired());
                         fields.add(aModelField);
                     }else{
                         arguments.add(argument);
@@ -332,7 +333,7 @@ public class EndpointOperation {
                     if(!arg.getName().equalsIgnoreCase(FORMAT_PARAM_NAME)){
                         String ad = null;
                         if (dataTypeMapper instanceof DataTypeMappingProvider2)
-                            ad = ((DataTypeMappingProvider2) dataTypeMapper).getArgumentDefinition(arg);
+                            ad = ((DataTypeMappingProvider2) dataTypeMapper).getArgumentDefinition(method, arg);
                         else
                             ad = dataTypeMapper.getArgumentDefinition(arg.getDataType(), arg.getName());
                         argumentDefinitions.add( ad );
