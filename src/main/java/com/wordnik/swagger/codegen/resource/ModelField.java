@@ -19,6 +19,7 @@ package com.wordnik.swagger.codegen.resource;
 import com.wordnik.swagger.codegen.FieldDefinition;
 import com.wordnik.swagger.codegen.config.ApiConfiguration;
 import com.wordnik.swagger.codegen.config.DataTypeMappingProvider;
+import com.wordnik.swagger.codegen.config.DataTypeMappingProvider2;
 import com.wordnik.swagger.codegen.config.NamingPolicyProvider;
 
 import org.slf4j.Logger;
@@ -168,6 +169,9 @@ public class ModelField {
                 if(type.contains("date")||type.contains("Date") ){
                     fieldDefinition.getImportDefinitions().addAll(dataTypeMapper.getDateIncludes());
                     fieldDefinition.setHasDateResponse(true);
+                }
+                if(type.contains("json") && dataTypeMapper instanceof DataTypeMappingProvider2){
+                    fieldDefinition.getImportDefinitions().addAll(((DataTypeMappingProvider2) dataTypeMapper).getJsonIncludes());
                 }
                 if(type.startsWith("List[")){
                     fieldDefinition.getImportDefinitions().addAll(dataTypeMapper.getListIncludes());
