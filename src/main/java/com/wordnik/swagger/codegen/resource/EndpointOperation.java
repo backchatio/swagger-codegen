@@ -259,7 +259,7 @@ public class EndpointOperation {
 							pathParams.add(anArgument);
 						}else if (modelField.getParamType().equalsIgnoreCase(PARAM_TYPE_QUERY)) {
 							anArgument.setName(modelField.getName());
-							anArgument.setDataType(MethodArgument.ARGUMENT_STRING);
+                            anArgument.setDataType(dataTypeMapper.getClassType(modelField.getDataType(), false));
 							anArgument.setDescription(modelField.getDescription());
 							anArgument.setRequired(modelField.isRequired());
 							anArgument.setDefaultValue(modelField.getDefaultValue());
@@ -278,7 +278,7 @@ public class EndpointOperation {
                             method.setPostObject(true);
 						}
 
-                        if(modelField.isAllowMultiple() && dataTypeMapper.isPrimitiveType(modelField.getDataType())){
+                        if(modelField.isAllowMultiple()){
                             anArgument.setDataType(dataTypeMapper.getListReturnTypeSignature(
                                     dataTypeMapper.getClassType(modelField.getDataType(), false)));
                         }
