@@ -107,6 +107,7 @@ public class LibraryCodeGenerator {
         List<Resource> resources = apiMarshaller.readResourceDocumentation();
         preprocess(resources);
         StringTemplateGroup aTemplateGroup = new StringTemplateGroup("templates", languageConfig.getTemplateLocation());
+        configureTemplateGroup(aTemplateGroup);
         if(resources.size() > 0) {
         	generateVersionHelper(resources.get(0).getApiVersion(), aTemplateGroup);
         }
@@ -122,6 +123,8 @@ public class LibraryCodeGenerator {
         generateAPIClasses(resources, aTemplateGroup);
         generateMiscClasses(resources, aTemplateGroup);
     }
+
+    protected void configureTemplateGroup(StringTemplateGroup templateGroup) {}
 
     /**
      * prepares the model for template generation
