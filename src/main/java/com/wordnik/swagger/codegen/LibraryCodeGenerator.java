@@ -146,7 +146,7 @@ public class LibraryCodeGenerator {
      * while making the API calls to make sure Client and back end are compatible.
      * @param version
      */
-    private void generateVersionHelper(String version, StringTemplateGroup templateGroup) {
+    protected void generateVersionHelper(String version, StringTemplateGroup templateGroup) {
     	StringTemplate template = templateGroup.getInstanceOf(VERSION_OBJECT_TEMPLATE);
     	template.setAttribute("apiVersion", version);
     	template.setAttribute(PACKAGE_NAME, config.getApiPackageName());
@@ -158,7 +158,7 @@ public class LibraryCodeGenerator {
     /**
      * Generates model classes. If the class is already generated then ignores the same.
      */
-    private void generateModelClasses(List<Resource> resources, StringTemplateGroup templateGroup) {
+    protected void generateModelClasses(List<Resource> resources, StringTemplateGroup templateGroup) {
     	List<String> generatedClassNames = new ArrayList();
 
     	for(Resource resource: resources) {
@@ -200,7 +200,7 @@ public class LibraryCodeGenerator {
      * @param resources
      * @param templateGroup
      */
-    private void generateModelClassesForInput(List<Resource> resources, StringTemplateGroup templateGroup) {
+    protected void generateModelClassesForInput(List<Resource> resources, StringTemplateGroup templateGroup) {
     	List<String> generatedClasses = new ArrayList<String>();
     	for(Resource resource : resources) {
     		if(resource.getEndPoints() != null) {
@@ -370,7 +370,7 @@ public class LibraryCodeGenerator {
      * @param resources
      * @param templateGroup
      */
-    private void generateAPIClasses(List<Resource> resources, StringTemplateGroup templateGroup) {
+    protected void generateAPIClasses(List<Resource> resources, StringTemplateGroup templateGroup) {
 
     	for(Resource resource : resources) {
             try{
