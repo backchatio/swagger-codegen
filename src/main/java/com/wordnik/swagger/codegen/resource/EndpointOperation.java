@@ -349,12 +349,7 @@ public class EndpointOperation {
 			
 			//get return value
 			String returnType = dataTypeMapper.getClassType(responseClass, false);
-			if("".equals(returnType)){
-				method.setHasResponseValue(false);
-			}
-			else{
-				method.setHasResponseValue(true);
-			}
+            method.setHasResponseValue(!("".equals(returnType) || "void".equals(returnType)));
             //set the original response name, this is used in identifying if the respone is single valued or multi valued
             method.setReturnValueFromOperationJson(responseClass);
 			method.setReturnValue(dataTypeMapper.getClassType(responseClass, false));
